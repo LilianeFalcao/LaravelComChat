@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Message;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class MessageController extends Controller
         )->orderBy('created_at', 'ASC')->get();
 
         return response()->json([
-            'messages' => $messages
+            'messages' => $message
         ],  Response::HTTP_OK);
     }
 
