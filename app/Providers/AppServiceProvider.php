@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 use App\Models\User;
+use Inertia\Inertia;
+
 
 
 class AppServiceProvider extends ServiceProvider

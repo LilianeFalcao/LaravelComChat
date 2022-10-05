@@ -13,6 +13,8 @@ class MessageController extends Controller
 {
     public function listMessages(User $user)
     {
+        /* usuarios */
+        
         $userFrom = Auth::user()->id;
         $userTo = $user->id;
 

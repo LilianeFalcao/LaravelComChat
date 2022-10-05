@@ -39,11 +39,11 @@ import axios from 'axios';
                     <div class="w-3/12 bg-[#23353E] border-r border-black overflow-y-scroll">
                         <ul>
                             <li v-for="user in users" :key="user.id" @click="() => {loadMessages(user.id)}"
+                                :class="userActive && userActive.id == user.id ? 'bg-gray-800' : ' ' "
                                 class="p-6 text-lg text-white  leading-7 front-semibold border-b border-gray-200 hover:bg-gray-50 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">{{ user.name }}</p>
                                 <span class="ml-2 w-2 h-2 bg-blue-800 rounded-full"></span>
                             </li>
-
                         </ul>
                     </div>
                     <!-- box mensagens-->
@@ -54,12 +54,12 @@ import axios from 'axios';
                         <div class="w-full p-6 flex flex-col overflow-y-scroll bg-[#23353E]">
                             <div class="w-full mb-3t " v-for="message in messages" :key="message.id"
                                 :class="(message.from == $page.auth.user.id) ? 'text-righ' : '' ">
-                                <p :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe' "
-                                    class="inline-block p-2 rounded-lg messageFromMe text-white"
+                                <p class="inline-block p-2 rounded-lg messageFromMe text-white"
+                                    :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe' "
                                     style="max-width: 75%;">
                                     {{message.content}}
                                 </p>
-                                <span class="block mt-1 text-xxs text-gray-400">{{message.created_at}}
+                                <span class="block mt-1 text-xxs text-gray-400">{{message.created_at | formatDate}}
                                 </span>
                             </div>
                         </div>
@@ -93,11 +93,17 @@ export default {
     data() {
         return {
             users: [],
-            messages: []
+            messages: [],
+            userActive: []
         }
     },
     methods: {
         loadMessages: function (userId) {
+
+            axios.get(`api/users/${userId}`).then(response => {
+                this.userActive = response.data.user
+            })
+
             axios.get(`api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             })
