@@ -4,7 +4,7 @@ import axios from 'axios';
 </script>
 
 <template >
-    <AppLayout title="Comunidade" >
+    <AppLayout title="Comunidade">
         <template #header class="font-semibold text-xl text-gray-800 leading-tight bg-[#3B4A52]">
             <div class=" flex m-auto bg-[#3B4A52]">
                 <ul class="flex justify-between m-auto p-1 list-none">
@@ -38,8 +38,7 @@ import axios from 'axios';
                     <!-- lista de usuarios-->
                     <div class="w-3/12 bg-[#23353E] border-r border-black overflow-y-scroll">
                         <ul>
-                            <li v-for="user in users" :key="user.id" 
-                            @click="() => {loadMessages(user.id)}"
+                            <li v-for="user in users" :key="user.id" @click="() => {loadMessages(user.id)}"
                                 class="p-6 text-lg text-white  leading-7 front-semibold border-b border-gray-200 hover:bg-gray-50 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">{{ user.name }}</p>
                                 <span class="ml-2 w-2 h-2 bg-blue-800 rounded-full"></span>
@@ -53,11 +52,15 @@ import axios from 'axios';
                         <!-- box mensagens-->
 
                         <div class="w-full p-6 flex flex-col overflow-y-scroll bg-[#23353E]">
-                            <div class="w-full mb-3 text-right ">
-                                <p class="inline-block p-2 rounded-lg messageFromMe text-white" style="max-width: 75%;">
-                                    oi
+                            <div class="w-full mb-3t " v-for="message in messages" :key="message.id"
+                                :class="(message.from == $page.auth.user.id) ? 'text-righ' : '' ">
+                                <p :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe' "
+                                    class="inline-block p-2 rounded-lg messageFromMe text-white"
+                                    style="max-width: 75%;">
+                                    {{message.content}}
                                 </p>
-                                <span class="block mt-1 text-xxs text-gray-400"> 2022/09/28 17:19 </span>
+                                <span class="block mt-1 text-xxs text-gray-400">{{message.created_at}}
+                                </span>
                             </div>
                         </div>
                         <div class="w-full bg-[#23353E] p-6 border-t border-[#23353E] ">
@@ -95,7 +98,7 @@ export default {
     },
     methods: {
         loadMessages: function (userId) {
-             axios.get(`api/messages/${userId}`).then(response => {
+            axios.get(`api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             })
         }

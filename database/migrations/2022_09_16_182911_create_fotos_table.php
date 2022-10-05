@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('fotos', function (Blueprint $table){
             $table->bigIncrements('id');
-            $table->string('email');
-            $table->string('mensagem');
+            $table->string('nomeObra');
+            $table->date('data');
+            $table->time('duracao');
+            $table->string('sinopse');
+            $table->string('elenco');
+            $table->string('producao');
             $table->string('arquivo');
             $table->timestamps();
         });

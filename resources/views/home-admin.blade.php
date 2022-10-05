@@ -45,25 +45,49 @@
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Escreva aqui seu novo Post</h1>
-          <form method="POST" action="/fotos" enctype="multipart/form-data">
+          <h1 class="jumbotron-heading">Cadastre um conteúdo</h1>
+          <form method="POST" action="/filmes" enctype="multipart/form-data">
             @csrf
             <div class="form-group text-left">
-              <label for="email">E-mail</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="nome@dominio.com">
+              <label for="nomeObrea">Titulo</label>
+              <input class="form-control" id="nomeObra" name="nomeObra" rows="3"></input>
             </div>
+
+            <div class="form-group text-left">
+              <label for="data">Data de lançamento</label><br>
+              <input type="date" id="data" name="data"></input>
+            </div>
+
+            <div class="form-group text-left">
+              <label type="type" for="duracao">Duração</label><br>
+              <input type="time" id="duracao" name="duracao"></input>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="descricao">Sinopse</label>
+              <textarea class="form-control" id="sinopse" name="sinopse" rows="3"></textarea>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="elenco">Elenco</label>
+              <textarea class="form-control" id="elenco" name="elenco" rows="3"></textarea>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="producao">Produção</label>
+              <textarea class="form-control" id="producao" name="producao" rows="3"></textarea>
+            </div>
+
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="arquivo" name="arquivo">
-              <label class="custom-file-label" id="RotuloArquivo" for="arquivo">Escolha um arquivo</label>
+              <label class="custom-file-label" id="RotuloArquivo" for="arquivo">Imagem</label>
             </div>
-            <div class="form-group text-left">
-              <label for="mensagem">Sua mensagem</label>
-              <textarea class="form-control" id="mensagem" name="mensagem" rows="3"></textarea>
-            </div>
+
             <p>
               <button type="submit" class="btn btn-primary my-2">Enviar</button>
               <button type="reset" class="btn btn-secondary my-2">Cancelar</button>
             </p>
+
           </form>
         </div>
       </section>
@@ -72,29 +96,34 @@
         <div class="container">
           <div class="row">
             @foreach($posts as $post)
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$post->arquivo}}">
-                  <div class="card-body"> 
-                      <p class="card-text">{{$post->email}}</p>
-                      <p class="card-text">{{$post->mensagem}}</p>
-                      <div class="d-flex justify-content-between align-items-center ">
-                          <div class="btn-group"> 
-                              <a type="button" class=" btn btn-sm btn-outline-secondar" href="/download/{{$post->id}}"> Download</a>
-                              <form method="POST" action="/{{$post->id}}">
-                                @call_user_func
-                                <input type="hidden" name="_method" value="delete">
-                                <button type="submit" class="btn btn-sm btn-outline-danger"> Apagar</button>
-                              </form>
-                          </div>
+                <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$post->arquivo}}"></img>
+                    <div class="card-body">
+                      <p class="card-text"><strong>Título:</strong> {{$post->nomeObra}}</p>
+                      <p class="card-text"><strong>Lançamento:</strong> {{$post->data}}</p>
+                      <p class="card-text"><strong>Duração:</strong> {{$post->duracao}}</p>
+                      <p class="card-text"><strong>Sinopse:</strong> {{$post->sinopse}}</p>
+                      <p class="card-text"><strong>Elenco:</strong> {{$post->elenco}}</p>
+                      <p class="card-text"><strong>Produção:</strong> {{$post->producao}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/update/{{$post->id}}">Editar</a>
+                          <form method="POST" action="/{{$post->id}}">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
+                          </form>
+                        </div>
                       </div>
+                    </div>
                   </div>
                 </div>
-              </div>
             @endforeach
           </div>
         </div>
       </div>
+
     </main>
 
     <footer class="text-muted">

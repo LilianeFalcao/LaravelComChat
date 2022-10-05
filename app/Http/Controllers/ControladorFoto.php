@@ -39,11 +39,15 @@ class ControladorFoto extends Controller
     {
         $path = $request->file('arquivo')->store('imagens', 'public');
         $post = new Foto();
-        $post->email = $request->input('email');
-        $post->mensagem = $request->input('mensagem');
+        $post->nomeObra = $request->input('nomeObra');
+        $post->data = $request->input('data');
+        $post->duracao = $request->input('duracao');
+        $post->sinopse = $request->input('sinopse');
+        $post->elenco = $request->input('elenco');
+        $post->producao = $request->input('producao');
         $post->arquivo = $path;
         $post->save();
-        return redirect('/home-admin');
+        return redirect('/admin');
     }
 
     /**
@@ -94,7 +98,7 @@ class ControladorFoto extends Controller
             Storage::disk('public')->delete($arquivo);
             $post->delete();
         }
-        return redirect('/home-admin');
+        return redirect('/admin');
     }
 
     public function download($id)
@@ -104,7 +108,7 @@ class ControladorFoto extends Controller
             $path = Storage::disk('public')->getDriver()->getAdapter()->apllyPathPrefix($post->arquivo);
             return response()->download($path);
         }else{
-            return redirect('/home-admin');
+            return redirect('/admin');
         }
     }
 }

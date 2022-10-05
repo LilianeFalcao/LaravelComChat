@@ -1,7 +1,10 @@
 header {
     display: flex;
-    border-bottom: 0.5rem solid
-    var(--secondary);
+    border-bottom: 0.5rem solid var(--secondary);
+}
+
+body {
+    background-image: url('../../images/loginD.png');
 }
 
 .mt-4 {
@@ -9,34 +12,21 @@ header {
     color: #004770;
 }
 
-.w-full{
+.w-full {
     background-color: #23353E;
 }
 
-.block mt-1 w-full{
+.block mt-1 w-full {
     color: white;
 }
 
-.nome{
+.nome {
     color: white;
 }
-
-*{
-    background-image: url('../../images/loginD.png');
-}
-
-<<<<<<< HEAD
-.w-full{
-    background-color: #23353E;
-}
-=======
->>>>>>> 260032add2e5867efc14f1b1c1f59870cbac706a
-
-.underline{
+.underline {
     color: white
 }
 
-
-.block{
+.block {
     color: white;
 }
