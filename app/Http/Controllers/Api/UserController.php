@@ -20,7 +20,7 @@ class UserController extends Controller
             'users' => $users
         ], Response::HTTP_OK);
     }
-    public function show(User $user)
+    public function show(User $users)
     {
         return response()->json([
             'users' => $users
