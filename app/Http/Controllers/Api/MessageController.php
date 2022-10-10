@@ -20,7 +20,7 @@ class MessageController extends Controller
 
         /* consulta das mensagens */
 
-        $message = Message::where(
+        $messages = Message::where(
             function ($query) use ($userFrom, $userTo){
                 $query->where([
                     'from' => $userFrom,
@@ -37,7 +37,7 @@ class MessageController extends Controller
         )->orderBy('created_at', 'ASC')->get();
 
         return response()->json([
-            'messages' => $message
+            'messages' => $messages
         ],  Response::HTTP_OK);
     }
 

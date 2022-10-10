@@ -10,7 +10,6 @@ use App\Models\User;
 use Inertia\Inertia;
 
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

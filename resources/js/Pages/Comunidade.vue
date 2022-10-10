@@ -52,11 +52,14 @@ import axios from 'axios';
                         <!-- box mensagens-->
 
                         <div class="w-full p-6 flex flex-col overflow-y-scroll bg-[#23353E]">
-                            <div class="w-full mb-3t " v-for="message in messages" :key="message.id"
-                                :class="(message.from == $page.auth.user.id) ? 'text-righ' : '' ">
-                                <p class="inline-block p-2 rounded-lg messageFromMe text-white"
-                                    :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe' "
-                                    style="max-width: 75%;">
+                            <div
+                                v-for="message in messages" :key="message.id"
+                                 :class="(message.from == $page.auth.user.id) ? 'text-right' : ''"
+                                 class="w-full mb-3t ">
+                                <p
+                                    :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe'"
+                                    class="inline-block p-2 rounded-lg messageFromMe text-white"
+                                   style="max-width: 75%;">
                                     {{message.content}}
                                 </p>
                                 <span class="block mt-1 text-xxs text-gray-400">{{message.created_at | formatDate}}
