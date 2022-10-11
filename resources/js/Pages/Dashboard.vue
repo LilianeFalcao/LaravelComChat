@@ -1,22 +1,35 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
 </script>
 
 <template>
     <AppLayout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard aaaa
-            </h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
+        <template #header class="font-semibold text-xl text-gray-800 leading-tight bg-[#3B4A52]">
+            <div class=" flex m-auto bg-[#3B4A52]">
+                <ul class="flex justify-between m-auto p-1 list-none">
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Ação</a>
+                    </li>
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Comedia</a>
+                    </li>
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Slice of life</a>
+                    </li>
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Terror</a>
+                    </li>
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Sci - fi</a>
+                    </li>
+                    <li class="flex justify-center m-auto p-[10px] text-white">
+                        <a href="">Mais</a>
+                    </li>
+                </ul>
             </div>
+        </template>
+        <div>
+
         </div>
     </AppLayout>
 </template>

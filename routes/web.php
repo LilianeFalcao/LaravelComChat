@@ -18,14 +18,11 @@ use App\Http\Controllers\ControladorFoto;
 |
 */
 
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return view('welcomeL');
 });
+
 
 Route::middleware([
     'auth:sanctum',
