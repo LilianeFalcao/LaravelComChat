@@ -39,11 +39,14 @@ Route::middleware([
 
 /* Rotas admin*/
 
-Route::get('/admin', [ App\Http\Controllers\AdminController::class,'index'])->name ('home-admin') ;
+Route::get('/admin', [ App\Http\Controllers\ControladorFoto::class,'index'])->name ('home-admin') ;
+
 Route::get('/admin/login',[ App\Http\Controllers\Auth\AdminLoginController::class,'index']) -> name ('login-admin') ;
 Route::post('/admin/login',[ App\Http\Controllers\Auth\AdminLoginController::class,'login']) -> name ('login-admin-submit');
 Route::post('/admin/logout',[ App\Http\Controllers\Auth\AdminLoginController::class,'logout']) -> name ('logout-admin') ;
 
-
 Route::get('/filmes', [App\Http\Controllers\ControladorFoto::class, 'index']);
 Route::post('/filmes', [App\Http\Controllers\ControladorFoto::class, 'store']);
+Route::delete('/filmes/{foto}', [App\Http\Controllers\ControladorFoto::class, 'destroy']);
+Route::get('/filmes/{foto}/edit', [App\Http\Controllers\ControladorFoto::class, 'edit']);
+Route::put('/filmes/{foto}', [App\Http\Controllers\ControladorFoto::class, 'update']);

@@ -46,41 +46,43 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Cadastre um conteúdo</h1>
-          <form method="POST" action="/filmes" enctype="multipart/form-data">
+          <form method="POST" action="{{url('filmes',$foto->id)}}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="form-group text-left">
-              <label for="nomeObra">Titulo</label>
-              <input class="form-control" id="nomeObra" name="nomeObra" rows="3"></input>
+              <label for="nomeObrea">Titulo</label>
+              <input class="form-control" id="nomeObra" name="nomeObra" value="{{ $foto->nomeObra }}" rows="3"></input>
             </div>
 
             <div class="form-group text-left">
               <label for="data">Data de lançamento</label><br>
-              <input type="date" id="data" name="data"></input>
+              <input type="date" id="data" name="data" value="{{ $foto->data }}"></input>
             </div>
 
             <div class="form-group text-left">
               <label type="type" for="duracao">Duração</label><br>
-              <input type="time" id="duracao" name="duracao"></input>
+              <input type="time" id="duracao" name="duracao" value="{{ $foto->duracao }}"></input>
             </div>
 
             <div class="form-group text-left">
               <label for="descricao">Sinopse</label>
-              <textarea class="form-control" id="sinopse" name="sinopse" rows="3"></textarea>
+              <textarea class="form-control" id="sinopse" name="sinopse" rows="3" >{{ $foto->sinopse }}</textarea>
             </div>
 
             <div class="form-group text-left">
               <label for="elenco">Elenco</label>
-              <textarea class="form-control" id="elenco" name="elenco" rows="3"></textarea>
+              <textarea class="form-control" id="elenco" name="elenco" rows="3" >{{ $foto->elenco }}</textarea>
             </div>
 
             <div class="form-group text-left">
               <label for="producao">Produção</label>
-              <textarea class="form-control" id="producao" name="producao" rows="3"></textarea>
+              <textarea class="form-control" id="producao" name="producao" rows="3" >{{ $foto->producao }}</textarea>
             </div>
 
             <div class="custom-file">
                  <label for="arquivo">Imagem</label><br>
-                  <input type="file" name="arquivo" id="arquivo" accept="arquivo/*" required />
+                  <input type="file" name="arquivo" id="arquivo" accept="image/*" required />
+                  <img src="{{Storage::url($foto->arquivo)}}"  class="showImg" />
             </div>
 
             
@@ -95,37 +97,7 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row">
-            @foreach($foto as $foto)
-                <div class="col-md-4">
-                  <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$foto->arquivo}}"></img>
-                    <div class="card-body">
-                      <p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p>
-                      <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p>
-                      <p class="card-text"><strong>Duração:</strong> {{$foto->duracao}}</p>
-                      <p class="card-text"><strong>Sinopse:</strong> {{$foto->sinopse}}</p>
-                      <p class="card-text"><strong>Elenco:</strong> {{$foto->elenco}}</p>
-                      <p class="card-text"><strong>Produção:</strong> {{$foto->producao}}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/filmes/{{$foto->id}}/edit">Editar</a>
-                          <form method="POST" action="filmes/{{$foto->id}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            @endforeach
-          </div>
-        </div>
-      </div>
+
 
     </main>
 

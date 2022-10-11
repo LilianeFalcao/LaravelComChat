@@ -15,8 +15,8 @@ class ControladorFoto extends Controller
      */
     public function index()
     {
-        $posts = Foto::all();
-        return view('home-admin', compact('posts'));
+        $foto = Foto::all();
+        return view('home-admin', compact('foto'));
     }
 
     /**
@@ -37,17 +37,20 @@ class ControladorFoto extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('arquivo')->store('imagens', 'public');
-        $post = new Foto();
-        $post->nomeObra = $request->input('nomeObra');
-        $post->data = $request->input('data');
-        $post->duracao = $request->input('duracao');
-        $post->sinopse = $request->input('sinopse');
-        $post->elenco = $request->input('elenco');
-        $post->producao = $request->input('producao');
-        $post->arquivo = $path;
-        $post->save();
-        return redirect('/admin');
+            $foto = new Foto();
+            
+            $foto->nomeObra = $request->get('nomeObra');
+            $foto->data = $request->get('data');
+            $foto->duracao = $request->get('duracao');
+            $foto->sinopse = $request->get('sinopse');
+            $foto->elenco = $request->get('elenco');
+            $foto->producao = $request->get('producao');
+            $name = $request->file('arquivo')->getClientOriginalName();
+            $path = $request->file('arquivo')->storeAs("public/img", $name);
+            $foto->arquivo = $path;
+
+            $foto->save();
+            return redirect('/filmes');
     }
 
     /**
@@ -67,9 +70,9 @@ class ControladorFoto extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Foto $foto)
     {
-        //
+        return view('edit', compact('foto'));
     }
 
     /**
@@ -79,9 +82,32 @@ class ControladorFoto extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Foto $foto)
     {
-        //
+        $validated = $request->validate([
+            'nomeObra' => 'required|max:255',
+            'data' => 'required|max:255',
+            'duracao' => 'required|max:255',
+            'sinopse' => 'required|max:255',
+            'elenco' => 'required|max:255',
+            'producao' => 'required|max:255',
+            'arquivo' => 'image'
+        ]);
+        if ($validated) {
+            $foto->nomeObra = $request->get('nomeObra');
+            $foto->data = $request->get('data');
+            $foto->duracao = $request->get('duracao');
+            $foto->sinopse = $request->get('sinopse');
+            $foto->elenco = $request->get('elenco');
+            $foto->producao = $request->get('producao');
+            $name = $request->file('arquivo')->getClientOriginalName();
+            $path = $request->file('arquivo')->storeAs("public/img", $name);
+            $foto->arquivo = $path;
+
+
+            $foto->save();
+            return redirect('/filmes');
+        }
     }
 
     /**
@@ -90,25 +116,10 @@ class ControladorFoto extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Foto $foto)
     {
-        $post = Foto::find($id);
-        if(isset($post)){
-            $arquivo = $post->arquivo;
-            Storage::disk('public')->delete($arquivo);
-            $post->delete();
-        }
-        return redirect('/admin');
-    }
 
-    public function download($id)
-    {
-        $post = Foto::find($id);
-        if(isset($post)){
-            $path = Storage::disk('public')->getDriver()->getAdapter()->apllyPathPrefix($post->arquivo);
-            return response()->download($path);
-        }else{
-            return redirect('/admin');
-        }
+        $foto->delete();
+        return redirect("/filmes");
     }
 }
