@@ -78,14 +78,11 @@
               <textarea class="form-control" id="producao" name="producao" rows="3"></textarea>
             </div>
 
-            <div class="custom-file">
+            <div class="form-group text-left">
                  <label for="arquivo">Imagem</label><br>
-                  <input type="file" name="arquivo" id="arquivo" accept="arquivo/*" required />
-            </div>
-
-            
-    </div>
-
+                 <input type="file" name="arquivo" id="arquivo" accept="arquivo/*" required/>
+            </div>         
+    
             <p>
               <button type="submit" class="btn btn-primary my-2">Enviar</button>
               <button type="reset" class="btn btn-secondary my-2">Cancelar</button>
@@ -101,7 +98,7 @@
             @foreach($foto as $foto)
                 <div class="col-md-4">
                   <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$foto->arquivo}}"></img>
+                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$foto->arquivo}}" class="showImg"></img>
                     <div class="card-body">
                       <p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p>
                       <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p>
@@ -117,6 +114,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
                           </form>
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="/obra/{{$foto->id}}">+</a>
                         </div>
                       </div>
                     </div>

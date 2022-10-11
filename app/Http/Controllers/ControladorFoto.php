@@ -59,9 +59,21 @@ class ControladorFoto extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Foto $foto)
     {
-        //
+        return view('/obra', compact('foto'));
+    }
+        
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uhum()
+    {
+        $foto = new Foto();
+        return view('/mostrarmais', compact('foto'));
     }
 
     /**

@@ -65,33 +65,32 @@
                 </div>
             </div>
          </header>
-      
-            <main> 
-            
-            
-            
-        <div class="album py-5 bg-light">
+         
+
+         <main>
+         <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
-            @foreach($posts as $post)
+            @foreach($foto as $foto)
                 <div class="col-md-4">
                   <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$post->arquivo}}"></img>
+                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$foto->arquivo}}" class="showImg"></img>
                     <div class="card-body">
-                      <p class="card-text"><strong>Título:</strong> {{$post->nomeObra}}</p>
-                      <p class="card-text"><strong>Lançamento:</strong> {{$post->data}}</p>
-                      <p class="card-text"><strong>Duração:</strong> {{$post->duracao}}</p>
-                      <p class="card-text"><strong>Sinopse:</strong> {{$post->sinopse}}</p>
-                      <p class="card-text"><strong>Elenco:</strong> {{$post->elenco}}</p>
-                      <p class="card-text"><strong>Produção:</strong> {{$post->producao}}</p>
+                      <p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p>
+                      <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p>
+                      <p class="card-text"><strong>Duração:</strong> {{$foto->duracao}}</p>
+                      <p class="card-text"><strong>Sinopse:</strong> {{$foto->sinopse}}</p>
+                      <p class="card-text"><strong>Elenco:</strong> {{$foto->elenco}}</p>
+                      <p class="card-text"><strong>Produção:</strong> {{$foto->producao}}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/update/{{$post->id}}">Editar</a>
-                          <form method="POST" action="/{{$post->id}}">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/filmes/{{$foto->id}}/edit">Editar</a>
+                          <form method="POST" action="filmes/{{$foto->id}}">
                             @csrf
-                            <input type="hidden" name="_method" value="delete">
+                            @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
                           </form>
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="/obra">+</a>
                         </div>
                       </div>
                     </div>
@@ -101,5 +100,127 @@
           </div>
         </div>
       </div>
+   
 
-      </main>
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  max-width: 1950px;
+  max-height: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin: 1em 0;
+  font-family: sans-serif;
+}
+
+.upperHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    background-color: #23353E;
+    color: white;
+    padding: 1rem;
+}
+.logosHeader{
+    position: relative;
+    left: 9px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+}
+.iconPer{
+    position: absolute;
+    left: 79.15%;
+    right: 17.34%;
+    top: 1.81%;
+    bottom: 91.75%;
+}
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logos {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+main{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+h2 {
+    font-family: sans-serif;
+    font-size: 24;
+    color: white;
+}
+div p a{
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #ffffff;
+  font-size: 30px; color: #ffffff;
+}
+
+.usuario {
+    margin-right: 2rem;
+}
+
+form input{
+    position: relative;
+    left: 10%;
+    border-radius: 0.4rem;
+    background: rgba(196, 196, 196, 0.5);
+    border: 1px solid #969494;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 30px;
+    width: 505px;
+  }
+::placeholder{
+    color: whitesmoke;
+  }
+.tags {
+    display: flex;
+    margin: auto;
+    background-color: #3B4A52;
+}
+
+.tags ul {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.tags ul li {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 0 10px;
+}
+
+a {
+    display: flex;
+    font-family: 'Kulim Park', sans-serif;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+}
+ .fundo{
+  background-color: black;
+}
