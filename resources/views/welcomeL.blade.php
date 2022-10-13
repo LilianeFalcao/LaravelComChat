@@ -69,9 +69,9 @@
          <main>
         <div class="swiffy-slider">
             <ul class="slider-container">
-                <li><img src="../../images/stranger.png" alt="strangerthings"></li>
-                <li><img src="../../images/euphoria.jpg" alt="euphoria"></li>
-                <li><img src="../../images/it.png" alt="it"></li>
+                <li><img src="../../images/image24.png" alt="strangerthings"></li>
+                <li><img src="../../images/image23.png" alt="euphoria"></li>
+                <li><img src="../../images/image25.png" alt="it"></li>
             </ul>
 
             <button type="button" class="slider-nav"></button>
@@ -87,7 +87,7 @@
 
         <div class="quadros">
             <div class="quadradodestaques">
-                <div class="quadradodonomedestasques">
+                <div class="quadradodonomedestasques">luluzinha
                     <h1>Destaques</h1>
                 </div>
 

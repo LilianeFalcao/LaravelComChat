@@ -1,11 +1,24 @@
 import "./bootstrap";
 import "../css/app.css";
+import Vue from 'vue'
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
 import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
+import store from "./store"
+import moment from "moment/moment";
+
+moment.locale("pt-br");
+
+Vue.filter("formatDate", function (value) {
+  if (value) {
+    return moment(value).format("DD/MM/YYYY HH:mm");
+  }
+});
+
+store.dispatch('userStateAction');
 
 const appName =
   window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
