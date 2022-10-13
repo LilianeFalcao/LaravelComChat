@@ -1,0 +1,6 @@
+<p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p><br>
+                        <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p><br>
+                        <p class="card-text"><strong>Duração:</strong> {{$foto->duracao}}</p><br>
+                        <p class="card-text"><strong>Sinopse:</strong> {{$foto->sinopse}}</p><br>
+                        <p class="card-text"><strong>Elenco:</strong> {{$foto->elenco}}</p><br>
+                        <p class="card-text"><strong>Produção:</strong> {{$foto->producao}}</p>

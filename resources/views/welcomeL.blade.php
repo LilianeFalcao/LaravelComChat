@@ -115,7 +115,7 @@
                     </a>
                     <br>
                     <div class="mostrarmais">
-                        <a href="Mostrarmais.html">Mostrar Mais</a>
+                        <a type="button"  href="/mostrarmais">mostrar mais</a>
                     </div>
 
                 </article>

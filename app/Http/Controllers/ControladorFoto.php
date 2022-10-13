@@ -24,9 +24,9 @@ class ControladorFoto extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Foto $foto)
     {
-       //
+       
     }
 
     /**
@@ -35,7 +35,7 @@ class ControladorFoto extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Foto $foto)
     {
             $foto = new Foto();
             
@@ -51,6 +51,7 @@ class ControladorFoto extends Controller
 
             $foto->save();
             return redirect('/filmes');
+
     }
 
     /**
@@ -63,19 +64,7 @@ class ControladorFoto extends Controller
     {
         return view('/obra', compact('foto'));
     }
-        
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function uhum()
-    {
-        $foto = new Foto();
-        return view('/mostrarmais', compact('foto'));
-    }
-
+  
     /**
      * Show the form for editing the specified resource.
      *

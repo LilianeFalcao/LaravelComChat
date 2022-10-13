@@ -65,10 +65,8 @@
                 </div>
             </div>
          </header>
-         
 
-         <main>
-         <div class="album py-5 bg-light">
+        <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
             @foreach($foto as $foto)
@@ -90,7 +88,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
                           </form>
-                          <a type="button" class="btn btn-sm btn-outline-primary" href="/obra">+</a>
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="/obra/{{$foto->id}}">+</a>
                         </div>
                       </div>
                     </div>
@@ -100,6 +98,10 @@
           </div>
         </div>
       </div>
+         
+
+         <main>
+         
    
 
 

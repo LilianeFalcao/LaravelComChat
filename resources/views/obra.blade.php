@@ -1,98 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>principal</title>
-   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
-   <link rel='stylesheet' href='https://static.fontawesome.com/css/fontawesome-app.css'>
-   <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.2.0/css/all.css'>
-   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
+    <link rel='stylesheet' href='https://static.fontawesome.com/css/fontawesome-app.css'>
+    <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+
+    <link rel="stylesheet" href="css/principal.css">
 </head>
 
 <body class="fundo">
     <header>
-            <div >
-                <div class="upperHead">
-                  <div>
-                     <p>
-                      <a href="">Lumière</a>
+        <div>
+            <div class="upperHead">
+                <div>
+                    <p>
+                        <a href="principal.html">Lumière</a>
                     </p>
-                  </div>
-                    <form action="#" method="post">
-                        <input type="text" placeholder="Pesquisar">
-                    </form>
-                    <div class="logosHeader">
-                        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-                            @if (Route::has('login'))
-                                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                                    @else
-                                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
-                            @endif
-                     </div>
-                    </div>
                 </div>
-                <div class="tags">
-                    <ul>
-                        <li>
-                            <a href="Acao.html">Ação</a>
-                        </li>
-                        <li>
-                            <a href="Comedia.html">Comedia</a>
-                        </li>
-                        <li>
-                            <a href="Sliceoflife.html">Slice of life</a>
-                        </li>
-                        <li>
-                            <a href="Terror.html">Terror</a>
-                        </li>
-                        <li>
-                            <a href="Scifi.html">Sci - fi</a>
-                        </li>
-                        <li>
-                            <a href="">Mais</a>
-                        </li>
-                    </ul>
+                <form action="#" method="post">
+                    <input type="text" placeholder="Pesquisar">
+                    <button type="submit" class="button" img="lupa 13.png"></button>
+                </form>
+                <div class="logosHeader">
+                    <a href="usuario.html" class="button"> Usuário</a>
+                    <img src="./images/perfil.png" />
                 </div>
             </div>
-         </header>
+            <div class="tags">
+                <ul>
+                    <li>
+                        <a href="Acao.html">Ação</a>
+                    </li>
+                    <li>
+                        <a href="Comedia.html">Comedia</a>
+                    </li>
+                    <li>
+                        <a href="Sliceoflife.html">Slice of life</a>
+                    </li>
+                    <li>
+                        <a href="Terror.html">Terror</a>
+                    </li>
+                    <li>
+                        <a href="Scifi.html">Sci - fi</a>
+                    </li>
+                    <li>
+                        <a href="">Mais</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-         <main>
-         
+    <main>
 
-          
-                    <div class="card-body">
+        <div class="quadradodasinopse">
+
+            <div class="sisi">
+                <div>
+                    <div class="title">
+                    <p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p><br>
+                     <br>
+                    </div>
+                    <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p><br>
+                        <p class="card-text"><strong>Duração:</strong> {{$foto->duracao}}</p><br>
+                </div>
+            </div>
+            <div class="imgsi">
                       <div>
                         <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$foto->arquivo}}" class="showImg"></img>
                       </div>
                   </div>
+
+            <div class="sisi">
+            <p class="card-text"><strong>Sinopse:</strong> {{$foto->sinopse}}</p><br>
+                <br>
+                <p class="card-text"><strong>Produção:</strong> {{$foto->producao}}</p>
+                <br>
+                <p class="card-text"><strong>Elenco:</strong> {{$foto->elenco}}</p><br>
+            </div>
+        </div>
+
+        <div class="quadross">
+
+            <div class="quadradoavaliacoes">
+                <div class="quadradodoavaliacoes">
+                    <h1>Avaliações</h1>
+                </div>
+                <div class="dataava">
+                    <p> Sua Avaliação: </p>
+                </div>
+                <br>
+            </div>
+
+            <br>
+            
+            <div class="quadradocomentario">
+                <div class="quadradocomentario">
+                    <h1>Comentários</h1>
+                </div>
+            </div>
                 
-                  <div class="card-body">
-                      <div>                    
-                        <p class="card-text"><strong>Título:</strong> {{$foto->nomeObra}}</p><br>
-                        <p class="card-text"><strong>Lançamento:</strong> {{$foto->data}}</p><br>
-                        <p class="card-text"><strong>Duração:</strong> {{$foto->duracao}}</p><br>
-                        <p class="card-text"><strong>Sinopse:</strong> {{$foto->sinopse}}</p><br>
-                        <p class="card-text"><strong>Elenco:</strong> {{$foto->elenco}}</p><br>
-                        <p class="card-text"><strong>Produção:</strong> {{$foto->producao}}</p>
-                      </div>
-                  </div>
+        </div>
 
+    </main>
+    <footer>
+        <div class="rodape">
+        </div>
+    </footer>
+    
 
-   
-
+</body>
 
 <style>
-  * {
+* {
   margin: 0;
   padding: 0;
   outline: 0;
@@ -213,13 +239,71 @@ a {
   background-color: black;
 }
 
-.card-body{
+.quadradodasinopse{
+  background-color: #3B4A52;
   margin-top: 10px;
+  margin-left: 10px;
   border-radius: 10px;
-  background-color: #23353E;
+  height: 740px;
+  width: 800px;
+}
+
+h2{
+  margin-left: 10px;
+  margin-top: 10px;
   color: white;
-  font-size: 20px;
-  display: "flex";
-  flex-direction: "row";
-  justify-content: space-between;
+}
+
+.title a{
+  color: white;
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+
+.imgsi{
+  margin-left: 130px;
+  margin-top: 50px;
+}
+
+.sisi{
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 5px;
+  color: white;
+}
+.quadross{
+  margin-top: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px ;
+  width: 1200px;
+  height: 1000px;
+}
+.quadradoavaliacoes{
+  width: 1000px;
+  height: 200px;
+  background-color: #3B4A52;
+  border-radius: 10px;
+  color: white;
+}
+.dataava{
+  margin-left: 20px;
+  font-size: medium;
+  margin-top: 20px;
+}
+.quadradocomentario{
+  width: 1000px;
+  height: 500px;
+  margin-top: 10px;
+  background-color: #3B4A52;
+  border-radius: 10px;
+  color: white;
+}
+
+.rodape{
+  background-color: #23353E;
+  margin-top: 1px;
+  height: 50px;
 }
