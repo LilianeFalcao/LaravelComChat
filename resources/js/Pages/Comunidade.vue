@@ -38,8 +38,9 @@ import axios from 'axios';
                     <!-- lista de usuarios-->
                     <div class="w-3/12 bg-[#23353E] border-r border-black overflow-y-scroll">
                         <ul>
-                            <li v-for="user in users" :key="user.id" @click="() => {loadMessages(user.id)}"
-                                :class="userActive && userActive.id == user.id ? 'bg-gray-800' : ' ' "
+                            <li v-for="user in users" :key="user.id"
+                                @click="() => {loadMessages(user.id)}"
+                                :class="(userActive && userActive.id == user.id) ? 'bg-gray-200 bg-opacity-50' : '' "
                                 class="p-6 text-lg text-white  leading-7 front-semibold border-b border-gray-200 hover:bg-gray-50 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">{{ user.name }}</p>
                                 <span class="ml-2 w-2 h-2 bg-blue-800 rounded-full"></span>
@@ -52,9 +53,12 @@ import axios from 'axios';
                         <!-- box mensagens-->
 
                         <div class="w-full p-6 flex flex-col overflow-y-scroll bg-[#23353E]">
-                            <div class="w-full mb-3t " v-for="message in messages" :key="message.id"
-                                :class="(message.from == $page.props.auth.user.id) ? 'text-righ' : '' ">
-                                <p class="inline-block p-2 rounded-lg messageFromMe text-white"
+                            <div class="w-full mb-3t message "
+                                 v-for="message in messages" :key="message.id"
+                                :class="(message.from == $page.props.auth.user.id) ? 'text-righ' : '' "
+                                >
+                                <p
+                                    class="inline-block p-2 rounded-lg messageFromMe text-white"
                                     :class="(message.from == $page.props.auth.user.id) ? 'messageFromMe' : 'messageToMe' "
                                     style="max-width: 75%;">
                                     {{message.content}}
@@ -63,10 +67,13 @@ import axios from 'axios';
                                 </span>
                             </div>
                         </div>
-                        <div class="w-full bg-[#23353E] p-6 border-t border-[#23353E] ">
-                            <form>
+
+                      <!-- formulário-->
+
+                        <div v-if="userActive" class="w-full bg-[#23353E] p-6 border-t border-[#23353E] ">
+                            <form v-on:submit.prevent="sendMessage">
                                 <div class="flex items-center border-b border-gray-500 py-2">
-                                    <input type="text" placeholder="Digite..."
+                                    <input v-model="message" type="text" placeholder="Digite..."
                                         class="focus:shadow-none placeholder-shown:border-gray-500 text-white flex-1 rounded-lg border-none px-4 py-2 text-sm bg-[#23353E] ">
                                     <button type="submit"
                                         class="flex-shrink-0 bg-gray-500 hover:bg-gray-800 border-gray-500 hover:border-gray-800 text-sm border-4 text-white py-1 px-2 rounded">
@@ -94,20 +101,47 @@ export default {
         return {
             users: [],
             messages: [],
-            userActive: []
+            userActive: null,
+            message:null
         }
     },
     methods: {
-        loadMessages: function (userId) {
+        scrollToBottom:function (){
+          if (this.messages.length){
+             document.querySelectorAll('.message:last-child')[0].scrollIntoView()
+          }
+        },
+        loadMessages: async function (userId) {
 
-            axios.get(`api/users/${userId}`).then(response => {
-                this.userActive = response.data.user
-            })
+          axios.get(`api/users/${userId}`).then(response => {
+            this.userActive = response.data.user
+          })
 
-            axios.get(`api/messages/${userId}`).then(response => {
+          await axios.get(`api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
+          })
+
+          this.scrollToBottom()
+        },
+        sendMessage: async function (){
+
+          await axios.post('api/messages/store', {
+              'content':this.message,
+              'to':this.userActive.id
+          }).then(response=>{
+
+            this.messages.push({
+              'from': 1,
+              'to':this.userActive.id,
+              'content': this.message,
+              'created_at': new Date().toISOString(),
+              'updated_at': new Date().toISOString(),
             })
-        }
+
+            this.message = ''
+          })
+            this.scrollToBottom()
+        },
     },
     mounted() {
         axios.get('api/users')
@@ -120,10 +154,10 @@ export default {
 
 <style>
 .messageFromMe {
-    @apply bg-slate-200 bg-opacity-25;
+    @apply bg-slate-100 bg-opacity-25;
 }
 
 .messageToMe {
-    @apply bg-slate-400 bg-opacity-25;
+    @apply bg-slate-500 bg-opacity-25;
 }
 </style>

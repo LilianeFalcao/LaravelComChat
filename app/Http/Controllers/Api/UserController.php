@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index()
     {
         $userLogado = Auth::user();
 
@@ -19,10 +19,10 @@ class UserController extends Controller
             'users' => $users
         ], Response::HTTP_OK);
     }
-    public function show(User $users)
+    public function show(User $user)
     {
         return response()->json([
-            'users' => $users
+            'user' => $user
         ], Response::HTTP_OK);
     }
 }
